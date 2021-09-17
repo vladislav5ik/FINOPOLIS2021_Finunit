@@ -14,3 +14,12 @@ def sentiment_kb(percents):
         .row(InlineKeyboardButton(emojize(f":grinning: {percents[0]}%"), callback_data='1'),
              InlineKeyboardButton(emojize(f":neutral_face: {percents[1]}%"), callback_data='2'),
              InlineKeyboardButton(emojize(f":rage: {percents[2]}%"), callback_data='3'))
+
+
+def rate_kb():
+    return InlineKeyboardMarkup()\
+        .row(InlineKeyboardButton("1️⃣", callback_data='rate1'),
+             InlineKeyboardButton("2️⃣", callback_data='rate2'),
+             InlineKeyboardButton("3️⃣", callback_data='rate3'),
+             InlineKeyboardButton("4️⃣", callback_data='rate4'),
+             InlineKeyboardButton("5️⃣", callback_data='rate5'))

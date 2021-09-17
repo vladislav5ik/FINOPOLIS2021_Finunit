@@ -7,7 +7,6 @@ def api_newchat_request(chat_name, chat_id):
     params = {'name': str(chat_name), 'id': str(chat_id)}
     response = post(f'https://pb-emotions.bubbleapps.io/version-test/api/1.1/wf/newchat'
                     , data=params)
-    print(response.text)
 
 
 def api_create_message_request(message, chat_id, sender, num_of_message, positive, neutral, negative):
@@ -19,10 +18,10 @@ def api_create_message_request(message, chat_id, sender, num_of_message, positiv
               'num_of_message': num_of_message,
               'positive': positive,
               'neutral': neutral,
-              'negative': negative
+              'negative': negative,
+              'emoji': 0
               }
     response = post('https://pb-emotions.bubbleapps.io/version-test/api/1.1/wf/create_message', data=params)
-    print(response.text)
 
 
 def log_user_message(message: types.Message):
