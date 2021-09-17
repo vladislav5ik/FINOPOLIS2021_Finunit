@@ -177,8 +177,9 @@ async def bot_echo(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(Text(startswith='rate'), state='*')
 async def process_one_course_btn(callback_query: types.CallbackQuery):
     rate = callback_query.data[-1]
-    await bot.send_message("Спасибо за оценку!", chat_id=callback_query.message.chat.id)
-    print(rate)
+    await bot.send_message(text="Спасибо за оценку!",
+                           chat_id=callback_query.from_user.id)
+    await callback_query.answer()
 
 @dp.message_handler(state=SetSettings.age)
 async def age_chosen(message: types.Message, state: FSMContext):
