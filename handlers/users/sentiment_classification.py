@@ -16,10 +16,20 @@ def predict(text):
     return predicted
 
 
+def normalize_percents(a):
+    cumul_sum = 0.0
+    cumul_sum_rounded = 0
+    prev_baseline = 0
+    result = []
+    for i in a:
+        cumul_sum += i*100
+        cumul_sum_rounded = min(100, cumul_sum_rounded + int(round(i*100)))
+        result.append(cumul_sum_rounded - prev_baseline)
+        prev_baseline = cumul_sum_rounded
+    return result
+
+
 def process_sentiment(text):
-    result = predict(text).tolist()[0]
-    result = [ceil(num * 100) / 100.0 for num in result]
-    return result[1], result[0], result[2]  # positive - neutral - negative
-    # return f"{result[1]} Positive" \
-    #       f"\n{result[0]} Neutral" \
-    #       f"\n{result[2]} Negative"
+    predicted = predict(text).tolist()[0]
+    return normalize_percents([predicted[1], predicted[0], predicted[2]])
+    # returns [positive, neutral, negative]
